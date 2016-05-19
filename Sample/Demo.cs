@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-class Demo
+public static class Demo // for MessageBoxW function hook.
 {
     static NetHook.NetHook hook = NetHook.NetHook.CreateInstance();
 
@@ -16,14 +16,14 @@ class Demo
     {
         try
         {
-            hook.Suspend();
+            hook.Suspend(); // suspend hook, easy call MessageBoxW.
             Console.Title = lpCaption;
             Console.WriteLine(lpText);
             return MessageBoxW(hWnd, lpText, lpCaption, uType);
         }
         finally
         {
-            hook.Resume();
+            hook.Resume(); // when you do not need time, resume hook.
         }
     }
 
