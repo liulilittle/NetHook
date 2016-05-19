@@ -30,7 +30,7 @@ public static class Demo // for MessageBoxW function hook.
     static void Main(string[] args)
     {
         LPMESSAGEBOX fnMsgBoxW = MsgBoxW; // bind managed method delegate.
-        // for Message Box install a inline hook, and managed code bindings.
+        // for MessageBoxW install a inline hook, and managed code bindings.
         hook.Install(hook.GetProcAddress("user32.dll", "MessageBoxW"), hook.GetProcAddress(fnMsgBoxW));
         // call a managed the MessageBox.Show methods.
         MessageBox.Show("text", "caption");
