@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 public static class Demo // for MessageBoxW function hook.
 {
-    static NetHook.NetHook hook = NetHook.NetHook.CreateInstance();
+    static NetHook.NetHook hook = NetHook.NetHook.CreateInstance(); // for nethook assign a object instance.
 
     [DllImport("user32.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
     public static extern int MessageBoxW(IntPtr hWnd, string lpText, string lpCaption, uint uType);
@@ -17,9 +17,9 @@ public static class Demo // for MessageBoxW function hook.
         try
         {
             hook.Suspend(); // suspend hook, easy call MessageBoxW.
-            Console.Title = lpCaption;
+            Console.Title = lpCaption; // get input param, and set to the title.
             Console.WriteLine(lpText);
-            return MessageBoxW(hWnd, lpText, lpCaption, uType);
+            return MessageBoxW(hWnd, lpText, lpCaption, uType); // call MessageBoxW and returns its value.
         }
         finally
         {
@@ -29,8 +29,10 @@ public static class Demo // for MessageBoxW function hook.
 
     static void Main(string[] args)
     {
-        LPMESSAGEBOX fnMsgBoxW = MsgBoxW;
+        LPMESSAGEBOX fnMsgBoxW = MsgBoxW; // bind managed method delegate.
+        // for Message Box install a inline hook, and managed code bindings.
         hook.Install(hook.GetProcAddress("user32.dll", "MessageBoxW"), hook.GetProcAddress(fnMsgBoxW));
+        // call a managed the MessageBox.Show methods.
         MessageBox.Show("text", "caption");
     }
 }
