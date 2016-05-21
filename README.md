@@ -1,8 +1,5 @@
 # NetHook
-it is a can make .net / clr applications can be the underlying hook winapi, and modify api execution flow. 
-
-you can use it to accomplish want in RING3 layer any hook a winapi.
-in the open source code, contains a code demo.
+it is a can make .net / clr applications can be the underlying hook winapi, and modify api execution flow. you can use it to accomplish want in RING3 layer any hook a winapi.in the open source code, contains a code demo.
 
 in the nethook use the code asm code.
 1. x86 // E9 00 00 00 00
